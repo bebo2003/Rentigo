@@ -1,0 +1,37 @@
+.loader-container {
+    text-align: center;
+    position: relative;
+}
+
+.loader-item {
+    font-size: 2.5rem;
+    display: inline-block;
+    margin: 10px;
+    animation: bounce 1.5s infinite;
+}
+
+.car { animation-delay: 0s; }
+.watch { animation-delay: 0.3s; }
+.clothes { animation-delay: 0.6s; }
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+p {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #ff8c00, #ff0080);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 10px;
+    letter-spacing: 2px;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px rgba(255, 140, 0, 0.5); }
+    to { text-shadow: 0 0 20px rgba(255, 0, 128, 0.8); }
+}
