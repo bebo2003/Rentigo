@@ -20,7 +20,7 @@ import WishList from "./components/WishList/WishList";
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Pento from "./components/Pento/default/pento";
+import Pento from "./components/Pento/default/Pento";
 // import Watch from "./components/Watch/Watch/precisionandcraft.qodeinteractive.com/watch-store/Watch";
 import ProfileForm from "./components/Pento/default/Profile/Profile";
 import Lender from "./components/LoginLender/Lender";
