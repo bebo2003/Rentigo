@@ -168,7 +168,9 @@ export default function AdminPost() {
         >
           <option value="">Select Category</option>
           <option value="1">Cars</option>
+          <option value="3">ُElectronics</option>
           <option value="5">Watches</option>
+          <option value="7">Fashion</option>
           {/* Add more categories here */}
         </select>
       </div>

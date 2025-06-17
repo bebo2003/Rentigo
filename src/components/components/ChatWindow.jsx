@@ -7,9 +7,8 @@ export default function ChatWindow({ conversation }) {
   const [newMsg, setNewMsg] = useState('');
   const [loading, setLoading] = useState(false);
 
-  
   const token = localStorage.getItem('userToken');
-  const type = localStorage.getItem('userType');
+
   useEffect(() => {
     const fetchMessages = async () => {
       setLoading(true);
@@ -18,7 +17,7 @@ export default function ChatWindow({ conversation }) {
       setLoading(false);
     };
     fetchMessages();
-  }, [conversation]);
+  }, [conversation, token]);
 
   const handleSend = async () => {
     if (!newMsg.trim()) return;
@@ -29,38 +28,37 @@ export default function ChatWindow({ conversation }) {
   };
 
   return (
-    <div className="flex-1 flex flex-col">
+    <div className="flex-1 flex flex-col bg-gray-50 dark:bg-gray-900 rounded-xl shadow-md">
+
       {/* Messages Section */}
-      <div className="flex-1 overflow-y-auto bg-gray-800 p-4 rounded space-y-3">
+      <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {loading ? (
-          <p className="text-gray-400">جاري تحميل الرسائل...</p>
+          <p className="text-gray-400 text-center">جاري تحميل الرسائل...</p>
         ) : messages.length === 0 ? (
-          <p className="text-gray-400">لا توجد رسائل بعد.</p>
+          <p className="text-gray-400 text-center">لا توجد رسائل بعد.</p>
         ) : (
           messages.map((msg) => {
-            const isLender = type === "lender";
-console.log(isLender);
-
+            const isLenderMsg = msg.sender === 'lender';
             return (
               <div
                 key={msg.id}
-                className={`flex ${isLender ? 'justify-end' : 'justify-start'}`}
+                className={`flex ${isLenderMsg ? 'justify-end' : 'justify-start'}`}
               >
                 <div
-                  className={`rounded-lg px-4 py-2 max-w-[70%] shadow-md ${
-                    isLender
-                      ? 'bg-blue-500 text-white rounded-br-none self-end'
-                      : 'bg-purple-600 text-white rounded-bl-none self-start'
+                  className={`rounded-2xl px-4 py-2 max-w-[70%] shadow-md ${
+                    isLenderMsg
+                      ? 'bg-gradient-to-br from-blue-400 to-blue-600 text-white rounded-br-none'
+                      : 'bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-bl-none'
                   }`}
                 >
                   <div className="font-semibold text-sm mb-1">
-                    {msg.sender === 'lender'
+                    {isLenderMsg
                       ? `${conversation.lender?.first_name} ${conversation.lender?.last_name}`
                       : `${conversation.customer?.first_name} ${conversation.customer?.last_name}`}
                   </div>
-                  <p>{msg.message_content}</p>
+                  <p className="break-words">{msg.message_content}</p>
                   <div className="text-xs text-gray-200 mt-1 text-right">
-                    {new Date(msg.created_at).toLocaleTimeString()}
+                    {new Date(msg.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </div>
                 </div>
               </div>
@@ -70,17 +68,17 @@ console.log(isLender);
       </div>
 
       {/* Input Section */}
-      <div className="p-4 border-t flex">
+      <div className="p-4 border-t bg-gray-100 dark:bg-gray-800 flex items-center gap-2 rounded-b-xl">
         <input
           type="text"
           value={newMsg}
           onChange={(e) => setNewMsg(e.target.value)}
           placeholder="اكتب رسالة..."
-          className="flex-1 border rounded-lg p-2 mr-2 text-black"
+          className="flex-1 border border-gray-300 dark:border-gray-600 rounded-full p-2 px-4 text-black dark:text-white bg-white dark:bg-gray-700 focus:outline-none"
         />
         <button
           onClick={handleSend}
-          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
+          className="bg-yellow-400 text-black px-4 py-2 rounded-full hover:bg-yellow-500 transition"
         >
           إرسال
         </button>

@@ -286,6 +286,12 @@ export default function Navbar() {
         setDarkMode(!darkMode);
     }
 
+    function handleProfileClick() {
+        
+            navigate('/profile');
+       
+    }
+
     return (
  <nav className="bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-md border-b border-gray-200 dark:border-gray-700 p-3 md:p-4 top-0 left-0 right-0 z-50 ">
   <div className="max-w-screen-xl flex flex-wrap justify-between items-center mx-auto px-4 md:px-6">
@@ -306,7 +312,7 @@ export default function Navbar() {
     <div className={`w-full md:flex md:items-center md:space-x-6 md:w-auto ${menuOpen ? 'block' : 'hidden'}`}>
       {token && (
         <ul className="flex flex-col md:flex-row gap-2 md:gap-6 mt-4 md:mt-0 text-md font-medium">
-          {[
+          {[ 
             { to: 'home', label: 'Home', show: true },
             { to: 'about', label: 'About', show: true },
             { to: 'rent', label: `Rent`, show: userType !== 'lender' },
@@ -344,6 +350,15 @@ export default function Navbar() {
         <div className="flex items-center gap-2 px-3 py-1.5 rounded-full text-white text-xs font-bold shadow-md uppercase tracking-wide bg-gradient-to-r from-purple-600 to-indigo-700 animate-pulse">
           {userType === "lender" ? <Briefcase size={14} /> : <User size={14} />}
           {userType}
+
+          {/* صورة كرتون clickable */}
+          <img
+            src="https://i.pravatar.cc/150?img=12"
+            alt="Avatar"
+            className="w-8 h-8 rounded-full border-2 border-white shadow-md cursor-pointer"
+            onClick={handleProfileClick}
+            title="Go to Profile"
+          />
         </div>
       )}
 
@@ -392,6 +407,5 @@ export default function Navbar() {
     </div>
   </div>
 </nav>
-
     );
 }

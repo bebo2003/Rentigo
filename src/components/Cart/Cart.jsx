@@ -238,40 +238,43 @@ export default function MyRentRequestsTable() {
     }
   }
 
-  function confirmCancelPopup(rentId) {
-    toast.info(
-      ({ closeToast }) => (
-        <div className="flex flex-col gap-2">
-          <p>دا مش حدانا ف البلد بس ماشي </p>
-          <div className="flex justify-end gap-3">
-            <button
-              onClick={() => {
-                cancelRequest(rentId);
-                closeToast();
-              }}
-              className="px-3 py-1 rounded-md text-sm font-medium bg-red-600 hover:bg-red-700 text-white"
-            >
-             مبلاااش
-            </button>
-            <button
-              onClick={closeToast}
-              className="px-3 py-1 rounded-md text-sm font-medium bg-gray-400 hover:bg-gray-500 text-white"
-            >
-              بحبك
-            </button>
-          </div>
+function confirmCancelPopup(rentId) {
+  console.log("Clicked Cancel for Rent ID:", rentId); // Debug line
+
+  toast.info(
+    ({ closeToast }) => (
+      <div className="flex flex-col gap-2">
+        <p>دا مش حدانا ف البلد بس ماشي </p>
+        <div className="flex justify-end gap-3">
+          <button
+            onClick={() => {
+              cancelRequest(rentId);
+              closeToast();
+            }}
+            className="px-3 py-1 rounded-md text-sm font-medium bg-red-600 hover:bg-red-700 text-white"
+          >
+            مبلاااش
+          </button>
+          <button
+            onClick={closeToast}
+            className="px-3 py-1 rounded-md text-sm font-medium bg-gray-400 hover:bg-gray-500 text-white"
+          >
+            بحبك
+          </button>
         </div>
-      ),
-      {
-        position: 'top-center',
-        autoClose: false,
-        closeOnClick: false,
-        closeButton: false,
-        draggable: false,
-        theme: 'dark',
-      }
-    );
-  }
+      </div>
+    ),
+    {
+      position: 'top-center',
+      autoClose: false,
+      closeOnClick: false,
+      closeButton: false,
+      draggable: false,
+      theme: 'dark',
+    }
+  );
+}
+
 
   async function cancelRequest(rentId) {
     try {
@@ -337,7 +340,7 @@ export default function MyRentRequestsTable() {
                         : 'bg-red-600 hover:bg-red-700 text-white'
                     }`}
                   >
-                    {cancelingId === req.id ? 'Canlling...' : 'Cancel'}
+                    {cancelingId === req.id ? 'Cancelling...' : 'Cancel'}
                   </button>
                 </td>
               </tr>

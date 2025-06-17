@@ -29,6 +29,10 @@ import CarCategory from "./components/cars/cars_site/car";
 import LandPage from "./components/LandPage/LandPage";
 import TeamSection from "./components/About/About";
 import About from "./components/About/About";
+import Watch from "./components/Watch/Watch";
+import Electronic from "./components/Electronic/Electronic";
+import Allproducts from "./components/AllProducts/AllProducts";
+import Goods from "./components/AllProducts/AllProducts";
 
 
 function App() {
@@ -54,9 +58,11 @@ function App() {
       { path: "pento", element: <ProtectedRoutes><Pento/></ProtectedRoutes> },
       { path: "profile", element: <ProtectedRoutes><ProfileForm/></ProtectedRoutes> },
       { path: "lender", element: <ProtectedRoutes><Lender/></ProtectedRoutes> },
-      { path: "car", element: <ProtectedRoutes><CarCategory/></ProtectedRoutes> },
-      { path: "product", element: <ProtectedRoutes><ProductDetails /></ProtectedRoutes> },
-      { path: "products", element: <ProtectedRoutes><Products /></ProtectedRoutes> },
+      { path: "category/fashion", element: <ProtectedRoutes><CarCategory/></ProtectedRoutes> },
+      { path: "category/electronics", element: <ProtectedRoutes><Electronic/></ProtectedRoutes> },
+      { path: "category/watches", element: <ProtectedRoutes><Watch /></ProtectedRoutes> },
+      { path: "category/cars", element: <ProtectedRoutes><Products /></ProtectedRoutes> },
+      { path: "products", element: <ProtectedRoutes><Goods /></ProtectedRoutes> },
       { path: "wishlist", element: <ProtectedRoutes><WishList /></ProtectedRoutes> },
       { path: "chatpage/:conversationId", element: <ProtectedRoutes><ChatPage/></ProtectedRoutes> },  // <-- هنا
       { path: "chatpage", element: <ProtectedRoutes><ChatPage/></ProtectedRoutes> },  // <-- هنا
