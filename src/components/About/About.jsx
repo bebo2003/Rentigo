@@ -1,25 +1,41 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaFacebookF, FaLinkedinIn, FaGithub } from "react-icons/fa";
-import bebo from "../../../src/assets/images/bebo.jpg";
+import bebo from "../../../src/assets/images/bebo (2).jpg";
 import alaa from "../../../src/assets/images/Alaa.jpg";
+import ayten from "../../../src/assets/images/ayten.png";
 import eslam from "../../../src/assets/images/Eslam.png";
 import hossam from "../../../src/assets/images/hossam.png";
 
+import tarek from "../../../src/assets/images/tarok.png";
+import eman from "../../../src/assets/images/mimi.jpg";
+import sohad from "../../../src/assets/images/sohad.jpg";
+import ziad from "../../../src/assets/images/ziad.jpg";
+import rahma from "../../../src/assets/images/rahma.jpg";
+import habiba from "../../../src/assets/images/aya.png";
+import aya from "../../../src/assets/images/aya.png";
+import abdel from "../../../src/assets/images/abdel.png";
+
 const teamMembers = [
-  { img: alaa, name: "Alaa", role: "Frontend Developer" },
-  { img: "https://i.imgur.com/vOONp7T.png", name: "Habiba", role: "UI/UX Designer" },
-  { img: eslam, name: "Eslam", role: "Backend Developer" },
-  { img: bebo, name: "Abdelrahman", role: "Full Stack Developer" },
-  { img: hossam, name: "Hossam", role: "Project Manager" },
-  { img: "https://i.imgur.com/mV0hE6p.png", name: "Ayten", role: "Marketing Specialist" },
-  { img: "https://i.imgur.com/Zd0Lx0M.png", name: "Ahmed", role: "Business Analyst" },
-  { img: "https://i.imgur.com/OtG6a9p.png", name: "Sara", role: "QA Engineer" },
-  { img: "https://i.imgur.com/Y0S1L8y.png", name: "Mohamed", role: "Data Scientist" },
-  { img: "https://i.imgur.com/ffWnINe.png", name: "Nada", role: "Content Creator" },
-  { img: "https://i.imgur.com/I7VmjCe.png", name: "Omar", role: "DevOps Engineer" },
-  { img: "https://i.imgur.com/1x1USeR.png", name: "Lina", role: "Product Owner" },
-  { img: "https://i.imgur.com/QGeOfbr.png", name: "Youssef", role: "UI Designer" },
+    { img: bebo, name: "Abdelrahman", role: "Team Leader | FrontEnd Leader" },
+  { img: alaa, name: "Alaa", role: "Backend | Team Lead BackEnd" },
+    { img: hossam, name: "Hossam", role: "FrontEnd" },
+    { img: ayten, name: "Ayten", role: "DataBase" },
+    { img: eslam, name: "Eslam", role: "DataBase" },
+  { img: habiba, name: "Habiba", role: "FrontEnd" },
+
+  
+
+  
+  
+  { img: tarek , name: "Tarek", role: "BackEnd" },
+  { img: eman, name: "Eman", role: "FrontEnd" },
+  { img: ziad, name: "Ziad", role: "BackEnd" },
+  { img: sohad, name: "Sohad", role: "FrontEnd" },
+  
+  { img: rahma, name: "Rahma", role: "Developer " },
+  { img: aya, name: "Aya", role: "BackEnd" },
+  { img: abdel, name: "Ziad", role: "Developer" },
 ];
 
 const About = () => {
