@@ -358,7 +358,7 @@ import { useNavigate } from 'react-router-dom';
 import { getOrCreateConversation } from '../../../services/chatAPI';
 import AnimatedPrice from '../../../AnimatedPrice/AnimatedPrice';
 import Lottie from 'lottie-react';
-import fashionLoader from '../../../../assets/lottie/car.json'; // ضيف الانميشن هنا
+import fashionLoader from '../../../../assets/lottie/car.json';
 
 const gradientStyles = [
   'from-blue-800 via-blue-600 to-blue-400',
@@ -469,7 +469,7 @@ export default function EcommercePage() {
 
     try {
       await axios.post(
-        `https://lavender-eel-222276.hostingersite.com/api/rent/review`,
+        "https://lavender-eel-222276.hostingersite.com/api/rent/review",
         {
           item_id: selectedProductId,
           rating: newReview.rating,
@@ -516,7 +516,6 @@ export default function EcommercePage() {
     <div className="min-h-screen bg-gray-900 py-10 px-4 relative">
       <ToastContainer />
 
-      {/* Lottie Loader Overlay */}
       {loading && (
         <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
           <Lottie animationData={fashionLoader} loop={true} className="w-64 h-64" />
@@ -546,34 +545,105 @@ export default function EcommercePage() {
                 {product.item_status === 'unavailable' ? (
                   <span className="bg-red-600 text-white px-4 py-2 rounded-full font-bold">Unavailable</span>
                 ) : (
-                  <div className="flex gap-6 items-center justify-center mb-4">
-                    {userRole === 'customer' && (
+                  userRole === 'customer' && (
+                    <div className="flex gap-6 items-center justify-center mb-4">
                       <button onClick={() => handleBooking(product.id)} className="flex flex-col items-center text-white hover:text-yellow-400">
                         <FaRegCalendarAlt size={26} />
                         <span className="text-xs mt-1 font-semibold">Book</span>
                       </button>
-                    )}
 
-                    {(userRole === 'customer' || userRole === 'lender') && (
-                      <>
-                        <button onClick={() => handleChat(product)} className="flex flex-col items-center text-white hover:text-yellow-400">
-                          <FaComments size={26} />
-                          <span className="text-xs mt-1 font-semibold">Chat</span>
-                        </button>
+                      <button onClick={() => handleChat(product)} className="flex flex-col items-center text-white hover:text-yellow-400">
+                        <FaComments size={26} />
+                        <span className="text-xs mt-1 font-semibold">Chat</span>
+                      </button>
 
-                        <button onClick={() => handleShowReviews(product.id)} className="flex flex-col items-center text-white hover:text-yellow-400">
-                          <FaStar size={26} />
-                          <span className="text-xs mt-1 font-semibold">Reviews</span>
-                        </button>
-                      </>
-                    )}
-                  </div>
+                      <button onClick={() => handleShowReviews(product.id)} className="flex flex-col items-center text-white hover:text-yellow-400">
+                        <FaStar size={26} />
+                        <span className="text-xs mt-1 font-semibold">Reviews</span>
+                      </button>
+                    </div>
+                  )
                 )}
               </div>
             </div>
           );
         })}
       </div>
+
+      {showReviewsPopup && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50">
+          <div className="bg-white rounded-lg shadow-lg w-96 p-6 relative">
+            <button
+              onClick={closeReviewsPopup}
+              className="absolute top-2 right-2 text-gray-500 hover:text-gray-800"
+            >
+              ✖
+            </button>
+
+            <h2 className="text-xl font-semibold mb-4 text-gray-800">Product Reviews</h2>
+
+            {reviewsLoading ? (
+              <p className="text-center text-gray-600">Loading reviews...</p>
+            ) : reviewsForProduct.length > 0 ? (
+              <div className="space-y-4 max-h-60 overflow-y-auto">
+                {reviewsForProduct.map((review, index) => (
+                  <div key={index} className="border-b pb-2">
+                    <p className="text-sm text-gray-700 font-semibold">Rating: {review.rating}⭐</p>
+                    <p className="text-gray-600">{review.comment}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-gray-600">No reviews yet.</p>
+            )}
+
+            {userRole === 'customer' && (
+              <>
+                {!addReviewMode ? (
+                  <button
+                    onClick={() => setAddReviewMode(true)}
+                    className="mt-4 w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+                  >
+                    Add Review
+                  </button>
+                ) : (
+                  <form onSubmit={submitNewReview} className="mt-4 space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">Rating</label>
+                      <select
+                        value={newReview.rating}
+                        onChange={(e) => setNewReview({ ...newReview, rating: parseInt(e.target.value) })}
+                        className="mt-1 block w-full border border-gray-300 rounded p-2"
+                      >
+                        {[1, 2, 3, 4, 5].map((rate) => (
+                          <option key={rate} value={rate}>{rate}</option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700">Comment</label>
+                      <textarea
+                        value={newReview.comment}
+                        onChange={(e) => setNewReview({ ...newReview, comment: e.target.value })}
+                        className="mt-1 block w-full border border-gray-300 rounded p-2"
+                        rows="3"
+                        required
+                      ></textarea>
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={submittingReview}
+                      className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 transition"
+                    >
+                      {submittingReview ? "Submitting..." : "Submit Review"}
+                    </button>
+                  </form>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
