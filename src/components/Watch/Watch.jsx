@@ -355,8 +355,8 @@ import { FaRegCalendarAlt, FaComments, FaStar } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import { getOrCreateConversation } from '../../../services/chatAPI';
-import AnimatedPrice from '../../../AnimatedPrice/AnimatedPrice';
+import { getOrCreateConversation } from '../../components/services/chatAPI';
+import AnimatedPrice from '../../components/AnimatedPrice/AnimatedPrice';
 import Lottie from 'lottie-react';
 import fashionLoader from '../../assets/lottie/watch.json';
 
